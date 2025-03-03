@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f4f4f4;
+    }
+    .container {
+      margin-top: 50px;
+    }
+    .payment-box {
+      width: 400px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 2px 2px 10px gray;
+    }
+    .option {
+      padding: 10px;
+      margin: 10px;
+      background-color: #007bff;
+      color: white;
+      font-size: 18px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    .option:hover {
+      background-color: #0056b3;
+    }
+    .hidden {
+      display: none;
+    }
+    body { font-family: Arial, sans-serif; text-align: center; background-color: #f4f4f4; }
+    .container { margin-top: 50px; }
+    .payment-box { width: 400px; margin: 20px auto; padding: 20px; background-color: white; border-radius: 10px; box-shadow: 2px 2px 10px gray; }
+    .option { padding: 10px; margin: 10px; background-color: #007bff; color: white; font-size: 18px; border: none; cursor: pointer; width: 80%; border-radius: 5px; transition: 0.3s; }
+    .option:hover { background-color: #0056b3; }
+    .disabled-link {
+        pointer-events: none; /* Prevent clicking */
+        opacity: 0.5; /* Make it look disabled */
+        cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Payment for {{ fee_type }}</h2>
+    <p>AmountS: ₹{{ amount }}</p>
+
+    <!-- Main payment method selection -->
+    <div class="payment-box">
+      <h3>Select Payment Method</h3>
+      <button class="option" onclick="showUPI()">Pay by UPI App</button>
+      <button class="option" onclick="showCard()">Debit/Credit Card</button>
+      <button class="option" onclick="showNetBanking()">Net Banking</button>
+    </div>
+
+    <!-- UPI Payment Section -->
+    <div id="upi-section" class="payment-box hidden">
+      <h3>Select UPI App</h3>
+      
+      <a href="{{ url_for('upi_payment', register_number=register_number, upitype='Google Pay') }}?fee_type={{ fee_type }}" class="option">Google Pay</a>
+      
+      <a href="{{ url_for('upi_payment', register_number=register_number, upitype='PhonePe') }}?fee_type={{ fee_type }}" class="option">PhonePe</a>
+      
+      <a href="{{ url_for('upi_payment', register_number=register_number, upitype='Paytm') }}?fee_type={{ fee_type }}" class="option">Paytm</a>
+      <br><br>
+      
+    </div>
+
+    <!-- Debit/Credit Card Payment Section -->
+    <div id="card-section" class="payment-box hidden">
+      <h3>Enter Card Details</h3>
+      <input type="text" placeholder="Card Number" required><br><br>
+      <input type="text" placeholder="Expiry Date (MM/YY)" required><br><br>
+      <input type="password" placeholder="CVV" required><br><br>
+      <input type="text" placeholder="Card Holder Name" required><br><br>
+      
+    </div>
+
+    <!-- Net Banking Payment Section -->
+    <div id="netbanking-section" class="payment-box hidden">
+        <h3>Select Your Bank</h3>
+        <select id="bankSelect">
+            <option value="" disabled selected>Select a bank</option>
+            <option value="SBI">SBI</option>
+            <option value="HDFC">HDFC</option>
+            <option value="ICICI">ICICI</option>
+            <option value="AXIS">AXIS</option>
+            <option value="KOTAK">KOTAK</option>
+            <option value="BANK OF INDIA">BANK OF INDIA</option>
+            <option value="CANARA">CANARA</option>
+            <option value="KVB">KVB</option>
+            <option value="CITY UNION BANK">CITY UNION BANK</option>
+            <option value="INDIAN BANK">INDIAN BANK</option>
+            <option value="SOUTH INDIAN BANK">SOUTH INDIAN BANK</option>
+            <option value="PNB">PNB</option>
+        </select>
+        <br><br>
+        <a id="netBankingLink" href="{{ url_for('netbanking_payment', register_number=register_number) }}?fee_type={{ fee_type }}" class="option disabled-link">Net Banking</a>
+    </div>
+
+  <script>
+    function showUPI() {
+      document.getElementById("upi-section").classList.remove("hidden");
+      document.getElementById("card-section").classList.add("hidden");
+      document.getElementById("netbanking-section").classList.add("hidden");
+    }
+
+    function showCard() {
+      document.getElementById("upi-section").classList.add("hidden");
+      document.getElementById("card-section").classList.remove("hidden");
+      document.getElementById("netbanking-section").classList.add("hidden");
+    }
+
+    function showNetBanking() {
+      document.getElementById("upi-section").classList.add("hidden");
+      document.getElementById("card-section").classList.add("hidden");
+      document.getElementById("netbanking-section").classList.remove("hidden");
+    }
+    document.getElementById("bankSelect").addEventListener("change", function() {
+        var netBankingLink = document.getElementById("netBankingLink");
+        
+        if (this.value) { // If a bank is selected
+            netBankingLink.classList.remove("disabled-link");
+        } else { // If no bank is selected
+            netBankingLink.classList.add("disabled-link");
+        }
+    });
+    function proceedToPayment() {
+      alert("Redirecting to Payment...");
+      window.location.href = "/payment-success";
+    }
+  </script>
+
+</body>
+</html>

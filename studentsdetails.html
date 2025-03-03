@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Details</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+    .photo-container {
+      margin-top: 20px;
+    }
+    .photo-container img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid #007BFF;
+    }
+    table {
+      margin: 20px auto;
+      border-collapse: collapse;
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 10px 15px;
+      border: 1px solid #ddd;
+    }
+    th {
+      background-color: #007BFF;
+      color: white;
+    }
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: blue;
+      color: white;
+      text-decoration: none;
+      margin-top: 20px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Student Details</h2>
+  
+  <div class="photo-container">
+    {% if student_data.photo %}
+      <img src="{{ url_for('static', filename=student_data.photo) }}" alt="Student Photo">
+    {% else %}
+      <img src="{{ url_for('static', filename='default_student.jpg') }}" alt="Default Photo">
+    {% endif %}
+  </div>
+  
+  <table>
+    <tr>
+      <th>Name</th>
+      <td>{{ student_data.name }}</td>
+    </tr>
+    <tr>
+      <th>Register Number</th>
+      <td>{{ student_data.register_number }}</td>
+    </tr>
+    <tr>
+      <th>Department</th>
+      <td>{{ student_data.department }}</td>
+    </tr>
+    <tr>
+      <th>Year/Sem</th>
+      <td>{{ student_data.year_sem }}</td>
+    </tr>
+    <tr>
+      <th>Bus Fee</th>
+      <td>₹{{ student_data.bus_fee }}</td>
+    </tr>
+    <tr>
+      <th>Tuition Fee</th>
+      <td>₹{{ student_data['Tuition Fee'] }}</td>
+    </tr>
+    <tr>
+      <th>University Fee</th>
+      <td>₹{{ student_data['University Fee'] }}</td>
+    </tr>
+    <tr>
+      <th>Total Fee</th>
+      <td>₹{{ student_data.bus_fee + student_data['Tuition Fee'] + student_data['University Fee'] }}</td>
+    </tr>
+  </table>
+  <a href="{{ url_for('fee', register_number=register_number) }}" class="button">Continue</a>
+</body>
+</html>

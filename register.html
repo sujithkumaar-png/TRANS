@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <style>
+            body {
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+            }
+    
+            .background-text {
+                font-size: 50px;
+                font-weight: bold;
+                opacity: 0.1;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: -1;
+            }
+    
+            form {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                background-color: #f2f2f2;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            }
+    
+            input {
+                padding: 10px;
+                margin: 10px 0;
+                width: 250px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+    
+            button {
+                padding: 10px 20px;
+                font-size: 16px;
+                background-color: blue;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+    
+            button:hover {
+                background-color: darkblue;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="background-text">SSMIET</div>
+        <h2>Student Registration</h2>
+        <form action="/register" method="POST">
+            <label>Register Number:</label>
+            <input type="text" name="register_number" required>
+            <br>
+            <button type="submit">Submit</button>
+
+        </form>
+        <H2>PLEASE CHECK YOUR REGISTER NUMBER!!!</H2>
+    </body>
+    
+</html>

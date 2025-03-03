@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payment Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    table {
+      width: 80%;
+      margin: 0 auto;
+      border-collapse: collapse;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+    th {
+      background-color: #007BFF;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Payment Details for {{ fee_type }}{% if filter_type and filter_value %} in {{ filter_type|capitalize }}: {{ filter_value }}{% endif %}</h1>
+  <table>
+    <tr>
+      <th>Register Number</th>
+      <th>Name</th>
+      <th>Fee Type</th>
+      <th>Amount (₹)</th>
+      <th>Date</th>
+    </tr>
+    {% for payment in payments %}
+      {% set student = students.get(payment.register_number) %}
+      <tr>
+        <td>{{ payment.register_number }}</td>
+        <td>{{ student.name if student else "Unknown" }}</td>
+        <td>{{ payment.fee_type }}</td>
+        <td>{{ payment.amount }}</td>
+        <td>{{ payment.date }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>

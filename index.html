@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <style>
+            body {
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+            }
+    
+            .background-text {
+                font-size: 50px;
+                font-weight: bold;
+                opacity: 0.1;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: -1;
+            }
+    
+            .button {
+                display: inline-block;
+                padding: 10px 20px;
+                font-size: 16px;
+                text-decoration: none;
+                background-color: blue;
+                color: white;
+                border-radius: 5px;
+                margin-top: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="background-text">SSMIET</div>
+        <h1>WELCOME TO 🙏🏻</h1> 
+      
+        <h1 style="color: orange;">SSM INSTITUTE OF ENGINEERING AND TECHNOLOGY
+            DINDIGUL-624002</h1>
+
+        <h2>Scan the QR code below to register:</h2>
+        <img src="{{ url_for('static', filename='qrcode.png') }}" alt="QR Code">
+        <br>
+        <a href="/register" class="button">PROCEED</a>
+    </body>
+</html>
+

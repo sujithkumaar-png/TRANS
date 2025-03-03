@@ -1,0 +1,83 @@
+/* General Styling */
+body {
+    background-color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+h1, h2 {
+    font-size: 35px;
+    color: #333;
+}
+
+p {
+    font-size: 20px;
+}
+
+/* Rotating SSMIET Background */
+.background-text {
+    position: absolute;
+    font-size: 100px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.08); /* Light text */
+    transform: rotate(-30deg);
+    top: 50%;
+    left: 50%;
+    transform-origin: center;
+    animation: rotateText 10s linear infinite;
+}
+
+@keyframes rotateText {
+    0% { transform: rotate(0deg) translate(-50%, -50%); }
+    100% { transform: rotate(360deg) translate(-50%, -50%); }
+}
+
+/* Form Styling */
+form {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    display: inline-block;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+label {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+input, button {
+    font-size: 20px;
+    padding: 10px;
+    margin: 10px;
+}
+
+/* Button */
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 20px;
+    color: white;
+    background: #007BFF;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background: #0056b3;
+}
+
+/* Table Styling */
+table {
+    width: 50%;
+    margin: auto;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid black;
+    font-size: 22px;
+}
